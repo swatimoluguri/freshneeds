@@ -53,18 +53,48 @@
   width: 25vh;
   height: 30vh;
 }
-.shimmer-img{
+.shimmer-img {
   height: 15vh;
   border-radius: 2vh 2vh 0vh 0vh;
   background-color: rgb(179, 179, 179);
 }
-.shimmer-heading{
+.shimmer-heading {
   margin: 1vh;
   background-color: rgb(180, 180, 180);
   height: 3vh;
 }
-.shimmer-text{
+.shimmer-text {
   margin: 2vh;
   background-color: rgb(180, 180, 180);
   height: 1vh;
+}
+.filter-btn {
+  margin: 2vh 0vh 0vh 2vh;
+  display: flex;
+  align-items: center;
+  gap: 2vh;
+}
+.filter-btn button {
+  border-radius: 1vh;
+  background-color: #04aa6d; /* Green */
+  border: none;
+  color: white;
+  padding: 1vh 2vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2vh;
+  margin: 1vh 0.5vh;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 0.1vh solid #04aa6d;
+}
+
+.filter-btn button:hover {
+  background-color: white;
+  color: black;
+  border: 0.1vh solid #04aa6d;
+}
+.filter-btn input{
+  height: 4vh;
 }

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const Body = () => {
   const n = 12;
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   useEffect(() => {
     fetchData();
@@ -18,19 +19,47 @@ const Body = () => {
       jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
     setFilteredRestaurants(
-        jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-      );
-      console.log(listOfRestaurants);
+      jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
   };
 
   return (
     <>
       <div className="body">
         <div className="filter-btn">
-          <button onClick={() => {
-            const filtered=listOfRestaurants.filter((res)=>res.info.avgRating>4);
-            setFilteredRestaurants(filtered);
-          }}>Top Rated Restaurants</button>
+          <input
+            type="text"
+            className="search"
+            placeholder="Search here..."
+            value={searchText}
+            onChange={(e) => {
+              const updatedsearchtext = e.target.value;
+              setSearchText(updatedsearchtext);
+              const filtered = listOfRestaurants.filter((res) =>
+                res.info.name
+                  .toLowerCase()
+                  .includes(updatedsearchtext.toLowerCase())
+              );
+              setFilteredRestaurants(filtered);
+            }}
+          />
+          <button
+            onClick={() => {
+              const filtered = listOfRestaurants.filter(
+                (res) => res.info.avgRating > 4
+              );
+              setFilteredRestaurants(filtered);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+          <button
+            onClick={() => {
+              setFilteredRestaurants(listOfRestaurants);
+            }}
+          >
+            Reset
+          </button>
         </div>
         <div className="restaurants">
           {filteredRestaurants.length !== 0
