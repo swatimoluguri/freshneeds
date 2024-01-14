@@ -66,7 +66,7 @@ const Body = () => {
             ? filteredRestaurants.map((restaurant) => (
                 <Card key={restaurant.info.id} resdata={restaurant} />
               ))
-            : [...Array(n)].map((i) => <Shimmer key={i} />)}
+            : [...Array(n)].map((_,i) => <Shimmer key={i} />)}
         </div>
       </div>
     </>

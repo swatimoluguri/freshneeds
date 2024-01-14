@@ -7,11 +7,13 @@
 .logo img {
   width: 40vh;
 }
-.nav-links {
+.nav-links,
+a {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
   list-style: none;
+  color: black;
 }
 .nav-links li {
   padding: 0vh 3vh;
@@ -95,6 +97,6 @@
   color: black;
   border: 0.1vh solid #04aa6d;
 }
-.filter-btn input{
+.filter-btn input {
   height: 4vh;
 }
