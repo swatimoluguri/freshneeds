@@ -2,6 +2,7 @@ import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { API_URL } from "./Api";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const n = 12;
@@ -64,7 +65,7 @@ const Body = () => {
         <div className="restaurants">
           {filteredRestaurants.length !== 0
             ? filteredRestaurants.map((restaurant) => (
-                <Card key={restaurant.info.id} resdata={restaurant} />
+                <Link to={"/restaurant/"+restaurant.info.id}><Card key={restaurant.info.id} resdata={restaurant} /></Link>
               ))
             : [...Array(n)].map((_,i) => <Shimmer key={i} />)}
         </div>
