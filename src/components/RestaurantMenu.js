@@ -9,17 +9,18 @@ const RestaurantMenu = () => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
   const [menuList, setMenuList] = useState([]);
   useEffect(() => {
+    const fetchmenu = async () => {
+      const data = await fetch(MENU_URL + resId.resId);
+      const jsondata = await data.json();
+      setMenuList(
+        jsondata.data.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]
+          ?.card?.card?.itemCards
+      );
+      setRestaurantDetails(jsondata.data.cards[0]?.card?.card?.info);
+    };
+
     fetchmenu();
-  }, []);
-  const fetchmenu = async () => {
-    const data = await fetch(MENU_URL + resId.resId);
-    const jsondata = await data.json();
-    setMenuList(
-      jsondata.data.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-        ?.card?.itemCards
-    );
-    setRestaurantDetails(jsondata.data.cards[0]?.card?.card?.info);
-  };
+  }, [resId.resId]);
   if (menuList.length === 0)
     return [...Array(n)].map((_, i) => <Shimmer key={i} />);
   return (

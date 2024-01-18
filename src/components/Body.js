@@ -26,11 +26,11 @@ const Body = () => {
 
   return (
     <>
-      <div className="body">
-        <div className="filter-btn">
+      <div className="m-4">
+        <div className="m-4">
           <input
+            className="focus:ring-2 focus:ring-green-600 focus:outline-none appearance-none w-64 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm "
             type="text"
-            className="search"
             placeholder="Search here..."
             value={searchText}
             onChange={(e) => {
@@ -44,7 +44,7 @@ const Body = () => {
               setFilteredRestaurants(filtered);
             }}
           />
-          <button
+          <button className="btn btn--primary"
             onClick={() => {
               const filtered = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4
@@ -54,7 +54,7 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
-          <button
+          <button className="btn btn--secondary"
             onClick={() => {
               setFilteredRestaurants(listOfRestaurants);
             }}
@@ -62,12 +62,14 @@ const Body = () => {
             Reset
           </button>
         </div>
-        <div className="restaurants">
+        <div className="flex flex-wrap">
           {filteredRestaurants.length !== 0
             ? filteredRestaurants.map((restaurant) => (
-                <Link to={"/restaurant/"+restaurant.info.id}><Card key={restaurant.info.id} resdata={restaurant} /></Link>
+                <Link to={"/restaurant/" + restaurant.info.id}>
+                  <Card key={restaurant.info.id} resdata={restaurant} />
+                </Link>
               ))
-            : [...Array(n)].map((_,i) => <Shimmer key={i} />)}
+            : [...Array(n)].map((_, i) => <Shimmer key={i} />)}
         </div>
       </div>
     </>
