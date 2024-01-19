@@ -7,15 +7,18 @@ import { Link } from "react-router-dom";
 const Body = () => {
   const n = 12;
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [topFilter,setTopFilter]=useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   useEffect(() => {
     fetchData();
+    // console.log(listOfRestaurants);
   }, []);
 
   const fetchData = async () => {
     const data = await fetch(API_URL);
     const jsonList = await data.json();
+    //console.log(jsonList);
     setListOfRestaurants(
       jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
@@ -26,8 +29,8 @@ const Body = () => {
 
   return (
     <>
-      <div className="m-4">
-        <div className="m-4">
+      <div className="m-auto w-4/5">
+        <div className="mx-20 my-4">
           <input
             className="focus:ring-2 focus:ring-green-600 focus:outline-none appearance-none w-64 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm "
             type="text"
@@ -44,25 +47,26 @@ const Body = () => {
               setFilteredRestaurants(filtered);
             }}
           />
-          <button className="btn btn--primary"
+          <button className={`btn btn--primary inline ${topFilter ? 'opacity-50 pointer-events-none' : ''}`}
             onClick={() => {
               const filtered = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4
               );
               setFilteredRestaurants(filtered);
+              setTopFilter(topFilter===true?false:true);
             }}
           >
             Top Rated Restaurants
           </button>
-          <button className="btn btn--secondary"
+          <button className={`btn btn--secondary inline ${topFilter?'block':'hidden'}`}
             onClick={() => {
               setFilteredRestaurants(listOfRestaurants);
+              setTopFilter(topFilter===true?false:true);
             }}
-          >
-            Reset
+          >X
           </button>
         </div>
-        <div className="flex flex-wrap">
+        <div className="mx-6 my-8 flex flex-wrap gap-8 justify-around">
           {filteredRestaurants.length !== 0
             ? filteredRestaurants.map((restaurant) => (
                 <Link to={"/restaurant/" + restaurant.info.id}>
