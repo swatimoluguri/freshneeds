@@ -7,13 +7,21 @@ const Card = (props) => {
   return (
     <>
       <div className="rounded-xl w-60 bg-slate-200 hover:bg-slate-300 hover:cursor-pointer transition-transform ease-in-out duration-300 transform hover:scale-95">
-        <div className="h-52">
+        <div className="h-52 relative">
           <img
-            className="rounded-t-xl w-full h-full object-cover "
+            className="rounded-t-xl w-full h-full object-cover"
             src={ASSET_URL + props.resdata.info.cloudinaryImageId}
             alt="restaurant"
           />
+          <div className="absolute bottom-0 w-full text-center text-white bg-gradient-to-t from-slate-950 to-transparent flex items-baseline">
+            <h2 className="font-bold pl-1">
+              {props.resdata.info.aggregatedDiscountInfoV3.header}{" "}
+              {props.resdata.info.aggregatedDiscountInfoV3.subHeader}
+            </h2>
+            <div className="h-14"></div>
+          </div>
         </div>
+
         <div className="m-4 pb-4">
           <div className="font-bold text-lg">
             <h2 className="overflow-hidden whitespace-nowrap text-ellipsis">
@@ -42,13 +50,15 @@ const Card = (props) => {
               </p>
             </div>
             <div>
-              <p className="align-middle font-bold">{props.resdata.info.sla.slaString}</p>
+              <p className="align-middle font-bold">
+                {props.resdata.info.sla.slaString}
+              </p>
             </div>
           </div>
 
           <div className="">
             <p className="text-sm text-slate-600">
-              {props.resdata.info.costForTwo} 
+              {props.resdata.info.costForTwo}
             </p>
             <p className="text-sm text-slate-600 overflow-hidden whitespace-nowrap text-ellipsis">
               {props.resdata.info.cuisines.join(", ")}
