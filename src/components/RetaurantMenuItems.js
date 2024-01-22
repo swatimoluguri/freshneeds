@@ -3,18 +3,18 @@ import nonveg from "../assets/nonveg.png";
 import veg from "../assets/veg.png";
 import { useState } from "react";
 
-const RetaurantMenuItems = (props) => {
-  const [showItems, SetShowItems] = useState(false);
+const RetaurantMenuItems = ({itemList,showItems}) => {
+  const [showSubItems, SetShowSubItems] = useState(false);
   const HandleClick = () => {
-    SetShowItems(!showItems);
+    SetShowSubItems(!showSubItems);
   };
-  return (
+  return showItems&&(
     <div>
-      {props.itemList?.hasOwnProperty("categories") ? (
-        props.itemList?.categories?.map((itm) => (
+      {itemList?.hasOwnProperty("categories") ? (
+        itemList?.categories?.map((itm) => (
           <div className="p-4 shadow-lg " onClick={HandleClick}>
             <h4 className="font-bold">{itm?.title}</h4>
-            {showItems && (
+            {showSubItems && (
               <ul>
                 {itm?.itemCards?.map((categoryItm) => (
                   <li key={categoryItm?.card?.info?.id}>
@@ -33,7 +33,7 @@ const RetaurantMenuItems = (props) => {
       ) : (
         <div>
           <ul>
-            {props.itemList?.itemCards?.map((itm) => (
+            {itemList?.itemCards?.map((itm) => (
               <li
                 className="flex justify-between p-2 border-b-2"
                 key={itm?.card?.info?.id}
@@ -56,7 +56,7 @@ const RetaurantMenuItems = (props) => {
                 </div>
 
                 <div className="w-3/12 flex flex-col justify-center items-center relative my-2">
-                  <button className="absolute bg-white px-4 py-1 rounded-lg font-semibold shadow-md">
+                  <button className="absolute bg-green-600 text-white px-4 py-1 rounded-lg font-semibold shadow-md bottom-0 transform translate-y-1">
                     ADD
                   </button>
 

@@ -1,6 +1,6 @@
 import { MENU_URL } from "./Api";
 import { useState, useEffect } from "react";
-import Shimmer from "./Shimmer";
+import ShimmerMenu from "./ShimmerMenu";
 import { useParams } from "react-router-dom";
 import RestaurantBanner from "./RestaurantBanner";
 import RetaurantMenuItems from "./RetaurantMenuItems";
@@ -10,7 +10,7 @@ const RestaurantMenu = () => {
   const n = 12;
   const [menuList, setMenuList] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
-  const [showItems, SetShowItems] = useState(false);
+  const [showItems, SetShowItems] = useState(1);
 
   useEffect(() => {
     const fetchmenu = async () => {
@@ -20,39 +20,35 @@ const RestaurantMenu = () => {
         jsondata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
       const resData = jsondata?.data?.cards[0]?.card?.card.info;
       setMenuList(newMenuList);
-      console.log(newMenuList);
       setRestaurantData(resData);
     };
     fetchmenu();
   }, [resId.resId]);
 
-  const HandleClick = () => {
-    SetShowItems(!showItems);
-  };
-
   if (menuList.length === 0)
-    return [...Array(n)].map((_, i) => <Shimmer key={i} />);
+    return [...Array(n)].map((_, i) => <ShimmerMenu key={i} />);
   return (
     <>
       <RestaurantBanner restaurantData={restaurantData} />
       {menuList.map(
-        (item) =>
+        (item, idx) =>
           item.card.card.hasOwnProperty("title") &&
           !item.card.card.hasOwnProperty("carousel") && (
             <div className="w-6/12 m-auto my-4" key={item?.card?.card?.title}>
               <div
-                className="p-4 shadow-lg text-lg flex justify-between"
-                onClick={HandleClick}
+                className="p-4 shadow-lg text-lg flex justify-between cursor-pointer"
+                onClick={() => {
+                  showItems === idx ? SetShowItems(null) : SetShowItems(idx);
+                }}
               >
                 <h2 className="font-bold">{item?.card?.card?.title}</h2>
-                <p>⬇️</p>
+                {showItems=== idx?<p>⬆️</p>:<p>⬇️</p>}
               </div>
-              {showItems && (
-                <RetaurantMenuItems
-                  key={item?.card?.card?.title + "menu"}
-                  itemList={item?.card?.card}
-                />
-              )}
+              <RetaurantMenuItems
+                key={item?.card?.card?.title + "menu"}
+                itemList={item?.card?.card}
+                showItems={idx === showItems ? true : false}
+              />
             </div>
           )
       )}

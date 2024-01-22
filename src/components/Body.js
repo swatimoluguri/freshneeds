@@ -12,7 +12,6 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   useEffect(() => {
     fetchData();
-    //console.log(filteredRestaurants);
   }, []);
 
   const fetchData = async () => {
