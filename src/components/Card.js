@@ -2,6 +2,7 @@ import { ASSET_URL } from "./Api";
 import redRating from "../assets/red_rating.png";
 import greenRating from "../assets/green_rating.png";
 import orangeRating from "../assets/orange_rating.png";
+import time from "../assets/time.png";
 
 const Card = (props) => {
   return (
@@ -13,10 +14,10 @@ const Card = (props) => {
             src={ASSET_URL + props.resdata.info.cloudinaryImageId}
             alt="restaurant"
           />
-          <div className="absolute bottom-0 w-full text-center text-white bg-gradient-to-t from-slate-950 to-transparent flex items-baseline">
+          <div className="absolute bottom-0 w-full text-white bg-gradient-to-t from-slate-950 to-transparent flex items-center pt-2">
+            <img className="pl-2 h-5 inline" src={time} alt="restaurant" />
             <h2 className="font-bold pl-1">
-              {props.resdata.info.aggregatedDiscountInfoV3.header}{" "}
-              {props.resdata.info.aggregatedDiscountInfoV3.subHeader}
+              {props.resdata.info.sla.slaString}
             </h2>
             <div className="h-14"></div>
           </div>
@@ -51,15 +52,12 @@ const Card = (props) => {
             </div>
             <div>
               <p className="align-middle font-bold">
-                {props.resdata.info.sla.slaString}
+                {props.resdata.info.costForTwo}
               </p>
             </div>
           </div>
 
           <div className="">
-            <p className="text-sm text-slate-600">
-              {props.resdata.info.costForTwo}
-            </p>
             <p className="text-sm text-slate-600 overflow-hidden whitespace-nowrap text-ellipsis">
               {props.resdata.info.cuisines.join(", ")}
             </p>

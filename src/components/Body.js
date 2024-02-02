@@ -100,7 +100,7 @@ const Body = () => {
               </Link>
             ))
           ) : (
-            <p>
+            <p className="min-h-screen">
               Couldn't find a restaurant/cuisines with the name "{searchText}".
               Please try again later.
             </p>
