@@ -17,6 +17,7 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch(API_URL);
     const jsonList = await data.json();
+    console.log(      jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
     setListOfRestaurants(
       jsonList.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );

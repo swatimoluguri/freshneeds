@@ -13,6 +13,7 @@ import Body from "./components/Body";
 import Error from "./components/Error";
 import About from "./components/About";
 import Cart from "./components/Cart";
+import Login from "./components/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -38,6 +39,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
       },
       {
         path: "/cart",
