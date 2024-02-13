@@ -4,10 +4,13 @@ import greencart from "../assets/cart-green.png";
 import blackcart from "../assets/cart-black.png";
 import { useState, useContext } from "react";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { loggedInUser } = useContext(UserContext);
+  const cart = useSelector((store) => store.cart.items);
+  console.log(cart);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -45,7 +48,7 @@ const Header = () => {
                 <Link to="/login">Login/Signup</Link>
               </li>
             )}
-            <li className="px-4  hover:text-green-700">
+            <li className="px-4 hover:text-green-700">
               <Link to="/cart">
                 <img
                   className="w-6 inline"
@@ -54,6 +57,7 @@ const Header = () => {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 />
+                {cart.length>0?<span className="text-red-600 font-bold">{cart.length>0} ({cart.length} items)</span>:<></>}
               </Link>
             </li>
           </ul>
