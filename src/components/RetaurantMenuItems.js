@@ -1,20 +1,62 @@
 import { ASSET_URL } from "./Api";
 import nonveg from "../assets/nonveg.png";
 import veg from "../assets/veg.png";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addItem } from "../utils/CartSlice";
+import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, clearCart } from "../utils/CartSlice";
+import { useParams } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
-const RetaurantMenuItems = ({ itemList, showItems }) => {
+const RetaurantMenuItems = ({ itemList, resName, showItems }) => {
+  const resId = useParams();
   const [showSubItems, SetShowSubItems] = useState(false);
   const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart.items);
   const HandleClick = () => {
     SetShowSubItems(!showSubItems);
   };
+  useEffect(() => {
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const HandleAddItemToCart = (itm) => {
-    dispatch(addItem(itm));
-    //dispatch(clearCart());
+    if (
+      cart.length === 0 ||
+      (cart.length > 0 && cart[cart.length - 1].restaurantId === resId.resId)
+    ) {
+      const newItem = {
+        ...itm,
+        restaurantId: resId.resId,
+        restaurantName: resName,
+      };
+      dispatch(addItem(newItem));
+    } else {
+      confirmAlert({
+        title: "Items already in cart !",
+        message:
+          "Your cart contains items from another restaurant. Would you like to reset your cart for adding items from this restaurant?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: () => {
+              dispatch(clearCart());
+              const newItem = {
+                ...itm,
+                restaurantId: resId.resId,
+                restaurantName: resName,
+              };
+              dispatch(addItem(newItem));
+            },
+          },
+          {
+            label: "No",
+            onClick: () => {},
+          },
+        ],
+      });
+    }
   };
+
   return (
     showItems && (
       <div>
@@ -66,7 +108,7 @@ const RetaurantMenuItems = ({ itemList, showItems }) => {
                   <div className="w-3/12 flex flex-col justify-center items-center relative my-2">
                     <button
                       className="absolute bg-green-600 text-white px-4 py-1 rounded-lg font-semibold shadow-md bottom-0 transform translate-y-1"
-                      onClick={()=>HandleAddItemToCart(itm)}
+                      onClick={() => HandleAddItemToCart(itm)}
                     >
                       ADD
                     </button>

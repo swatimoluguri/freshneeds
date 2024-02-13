@@ -2,16 +2,22 @@ import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import greencart from "../assets/cart-green.png";
 import blackcart from "../assets/cart-black.png";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "../utils/UserContext";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../utils/CartSlice";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { loggedInUser } = useContext(UserContext);
   const cart = useSelector((store) => store.cart.items);
-  console.log(cart);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const storedCart = JSON.parse(window.localStorage.getItem("cart"));
+    storedCart.map((item) => {
+      dispatch(addItem(item));
+    });
+  }, []);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -57,7 +63,13 @@ const Header = () => {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 />
-                {cart.length>0?<span className="text-red-600 font-bold">{cart.length>0} ({cart.length} items)</span>:<></>}
+                {cart.length > 0 ? (
+                  <span className="text-red-600 font-bold">
+                    {cart.length > 0} ({cart.length} items)
+                  </span>
+                ) : (
+                  <></>
+                )}
               </Link>
             </li>
           </ul>

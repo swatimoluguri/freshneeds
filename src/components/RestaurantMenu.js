@@ -47,6 +47,7 @@ const RestaurantMenu = () => {
               <RetaurantMenuItems
                 key={item?.card?.card?.title + "menu"}
                 itemList={item?.card?.card}
+                resName={restaurantData.name}
                 showItems={idx === showItems ? true : false}
               />
             </div>
