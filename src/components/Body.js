@@ -77,7 +77,7 @@ const Body = () => {
             X
           </button>
         </div>
-        <div className="mx-6 my-8 flex flex-wrap gap-8 justify-around">
+        <div className="min-h-screen mx-6 my-8 flex flex-wrap gap-8 justify-around">
           {searchText.length === 0 ? (
             filteredRestaurants.length !== 0 ? (
               filteredRestaurants.map((restaurant) => (
@@ -101,7 +101,7 @@ const Body = () => {
               </Link>
             ))
           ) : (
-            <p className="min-h-screen">
+            <p>
               Couldn't find a restaurant/cuisines with the name "{searchText}".
               Please try again later.
             </p>

@@ -8,16 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../utils/CartSlice";
 
 const Header = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const { loggedInUser } = useContext(UserContext);
   const cart = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
   useEffect(() => {
     const storedCart = JSON.parse(window.localStorage.getItem("cart"));
-    storedCart.map((item) => {
-      dispatch(addItem(item));
-    });
-  }, []);
+    if (storedCart && storedCart.length > 0)
+      storedCart.forEach((item) => dispatch(addItem(item)));
+  }, [dispatch]);
+  const [isHovered, setIsHovered] = useState(false);
+  const { loggedInUser } = useContext(UserContext);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };

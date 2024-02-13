@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, clearCart } from "../utils/CartSlice";
 import { useParams } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import "../index.css";
 
 const RetaurantMenuItems = ({ itemList, resName, showItems }) => {
   const resId = useParams();
@@ -107,7 +107,7 @@ const RetaurantMenuItems = ({ itemList, resName, showItems }) => {
 
                   <div className="w-3/12 flex flex-col justify-center items-center relative my-2">
                     <button
-                      className="absolute bg-green-600 text-white px-4 py-1 rounded-lg font-semibold shadow-md bottom-0 transform translate-y-1"
+                      className="absolute bg-green-600 text-white px-4 py-1 rounded-lg font-semibold shadow-md bottom-0 transform translate-y-1 active:scale-95"
                       onClick={() => HandleAddItemToCart(itm)}
                     >
                       ADD
