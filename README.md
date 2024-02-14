@@ -8,11 +8,13 @@ Food delivery app using React JS.
 ![image](https://github.com/swatimoluguri/freshneeds2.0/assets/149689000/c46cf9f5-d9c2-4312-9349-b5c1bbe80df8)
 
 
-Used Live Swiggy API for list of restaurants, menu and images fetch
+Used Live Swiggy API for list of restaurants, menu and images fetch.
 
-Hooks - useState, useEffect, useContext, useParams (provided by react-router-dom)
+Hooks - useState, useEffect, useContext, useParams (provided by react-router-dom).
 
-Cart management using Redux Library
+Cart management using Redux Library.
+
+Styled using Tailwind CSS.
 
 Practice project developed in memory of my startup - Freshneeds.😊
 
