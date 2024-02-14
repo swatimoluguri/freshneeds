@@ -29,7 +29,7 @@ const Body = () => {
   return (
     <>
       <div className="m-auto w-4/5">
-        <div className="mx-20 my-4">
+        <div className="mx-auto my-4 md:mx-20">
           <input
             className="focus:ring-2 focus:ring-green-600 focus:outline-none appearance-none w-64 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm "
             type="text"
@@ -65,17 +65,17 @@ const Body = () => {
           >
             Top Rated
           </button>
-          <button
-            className={`btn btn--secondary inline ${
-              topFilter ? "block" : "hidden"
-            }`}
-            onClick={() => {
-              setFilteredRestaurants(listOfRestaurants);
-              setTopFilter(topFilter === true ? false : true);
-            }}
-          >
-            X
-          </button>
+          {topFilter && (
+            <button
+              className="btn btn--secondary inline"
+              onClick={() => {
+                setFilteredRestaurants(listOfRestaurants);
+                setTopFilter(topFilter === true ? false : true);
+              }}
+            >
+              X
+            </button>
+          )}
         </div>
         <div className="min-h-screen mx-6 my-8 flex flex-wrap gap-8 justify-around">
           {searchText.length === 0 ? (

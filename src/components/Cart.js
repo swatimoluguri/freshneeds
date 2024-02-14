@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../utils/CartSlice";
 import Empty_cart from "../assets/empty_cart.png";
+import { Link } from "react-router-dom";
 
 
 function Cart() {
@@ -29,12 +30,11 @@ function Cart() {
 
   const handleClearCart = () => {
     dispatch(clearCart());
-    console.log(cart);
   };
   return cart.length !== 0 ? (
     <>
       <h3 className="mx-auto text-3xl font-bold mt-10 text-green-600">Cart</h3>
-      <div className="mt-10 rounded-xl p-4 m-4 bg-slate-100 w-6/12 mx-auto">
+      <div className="mt-10 rounded-xl p-4 m-4 bg-slate-100 w-10/12 md:w-6/12 mx-auto">
         <h2 className="p-4 text-xl font-bold">{cart[0]?.restaurantName}</h2>
         <hr />
         <ul className="m-4 p-4">
@@ -55,7 +55,7 @@ function Cart() {
           </span>
         </div>
       </div>
-      <div className="flex justify-between w-6/12 mx-auto">
+      <div className="flex justify-between w-10/12 md:w-6/12 mx-auto">
         <button
           className="bg-black text-white m-4 p-4"
           onClick={() => handleClearCart()}
@@ -63,7 +63,7 @@ function Cart() {
           Clear Cart
         </button>
         <button className="bg-green-600 text-white m-4 p-4">
-          Place Order{" "}
+        <Link to="/order">Place Order</Link>
         </button>
       </div>
     </>

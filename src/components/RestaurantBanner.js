@@ -8,15 +8,15 @@ import { ASSET_URL } from "./Api";
 const RestaurantBanner = (props) => {
   return (
     <div className="h-56 bg-green-950 text-white flex items-center justify-center">
-      <div className="h-44 w-60">
+      <div className="m-2 h-1/2 w-1/4 md:h-3/4 md:w-1/6">
         <img
           className="rounded-xl w-full h-full object-cover"
           src={ASSET_URL + props.restaurantData.cloudinaryImageId}
           alt="restaurant"
         />
       </div>
-      <div className="ml-10 flex flex-col gap-2">
-        <h1 className="text-4xl">{props.restaurantData.name}</h1>
+      <div className="m-2 md:ml-10 flex flex-col gap-2">
+        <h1 className="text-2xl md:text-4xl">{props.restaurantData.name}</h1>
         <h1 className="text-sm text-slate-300">
           {props.restaurantData.cuisines.join(", ")}
         </h1>
@@ -40,14 +40,14 @@ const RestaurantBanner = (props) => {
             ({props.restaurantData.totalRatingsString})
           </p>
         </div>
-        <div className="w-fit rounded-lg border-solid	border border-slate-50 px-4 py-2 my-2 flex gap-6">
+        <div className="w-fit rounded-lg border-solid	border border-slate-50 px-4 py-1 md:py-2 my-1 md:my-2 flex gap-1 md:gap-6">
           <div>
             <img
               className="align-middle h-5 inline"
               src={time}
               alt="restaurant"
             />
-            <p className="pl-2 align-middle inline">
+            <p className="text-xs md:text-lg pl-2 align-middle inline">
               {props.restaurantData.sla.slaString}
             </p>
           </div>
@@ -60,7 +60,7 @@ const RestaurantBanner = (props) => {
               src={cycle}
               alt="restaurant"
             />
-            <p className="pl-2 align-middle inline">
+            <p className="text-xs md:text-lg pl-2 align-middle inline">
               {props.restaurantData.sla.lastMileTravelString}
             </p>
           </div>

@@ -14,6 +14,7 @@ import Error from "./components/Error";
 import About from "./components/About";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
+import Order from "./components/Order";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -41,8 +42,12 @@ const appRouter = createBrowserRouter([
         element: <About />,
       },
       {
+        path: "/order",
+        element: <Order />,
+      },
+      {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: "/cart",

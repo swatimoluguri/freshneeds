@@ -34,7 +34,7 @@ const RestaurantMenu = () => {
         (item, idx) =>
           item.card.card.hasOwnProperty("title") &&
           !item.card.card.hasOwnProperty("carousel") && (
-            <div className="w-6/12 mx-auto my-2" key={item?.card?.card?.title}>
+            <div className="w-10/12 md:w-6/12 mx-auto my-2" key={item?.card?.card?.title}>
               <div
                 className="p-4 shadow-lg text-lg flex justify-between cursor-pointer"
                 onClick={() => {
