@@ -9,7 +9,9 @@ Food delivery app using React JS.
 
 
 Used Live Swiggy API for list of restaurants, menu and images fetch
+
 Hooks - useState, useEffect, useContext, useParams (provided by react-router-dom)
+
 Cart management using Redux Library
 
 Practice project developed in memory of my startup - Freshneeds.😊
